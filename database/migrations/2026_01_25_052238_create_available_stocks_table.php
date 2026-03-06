@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('available_stocks', function (Blueprint $table) {
-            $table->id();
+            $table->id(); 
+            $table->unsignedBigInteger('medicines_id')->nullable();
+            $table->foreign('medicines_id')->references('id')->on('medicines'); 
+            $table->string('quantity');  
+            $table->string('rack_no')->nullable();  
             $table->timestamps();
         });
     }
