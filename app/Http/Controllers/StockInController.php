@@ -135,6 +135,22 @@ class StockInController extends Controller
         $stock_in->save();
 
 
+                // Step 2: Check in available stock
+        $available = AvailableStock::where('medicines_id', $request->medicines_id)->first();
+
+        if ($available) {
+            // Already exists → increase quantity
+            $available->quantity += $request->quantity;
+            $available->save();
+        } else {
+            // Not exists → create new
+            
+            $newStock = new AvailableStock();
+            $newStock->medicines_id = $request->medicines_id;
+            $newStock->quantity = $request->quantity;
+            $newStock->save();
+        }
+
 
         return redirect()->route('stock_in.index')->with('custom_success', 'Stock In has been Updated Successfully!');
     }

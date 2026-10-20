@@ -60,7 +60,7 @@ class MedicineController extends Controller
     }
 
 
-     public function edit($id)
+    public function edit($id)
     {
         $medicines = Medicine::find($id);
         return view('pharmacy.medicine.edit', compact('medicines'));
@@ -85,7 +85,7 @@ class MedicineController extends Controller
         return redirect()->route('medicines.index')->with('custom_success', ' Medicine has been Updated Successfully!');
     }
 
-      public function view($id)
+    public function view($id)
     {
         $medicines = Medicine::find($id);
         return view('pharmacy.medicine.view', compact('medicines'));
@@ -93,8 +93,17 @@ class MedicineController extends Controller
     public function destroy($id)
     {
         $medicine = Medicine::find($id);
+
+        // Check if exists in available_stocks
+        if ($medicine->availableStocks()->exists() || $medicine->stockIn()->exists()) {
+            return redirect()->route('medicines.index')
+                ->with('custom_errors', 'Cannot delete! This medicine is already used in stock.');
+        }
+
         $medicine->delete();
-        return redirect()->route('medicines.index')->with('custom_success', ' Medicine has been Deleted Successfully!');
+
+        return redirect()->route('medicines.index')
+            ->with('custom_success', 'Medicine has been Deleted Successfully!');
     }
 
 

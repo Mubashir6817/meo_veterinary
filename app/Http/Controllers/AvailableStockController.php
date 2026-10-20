@@ -10,7 +10,8 @@ class AvailableStockController extends Controller
 {
     //
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         if ($request->ajax()) {
             $stock_available = AvailableStock::select('available_stocks.id', 'available_stocks.medicines_id', 'available_stocks.quantity', 'available_stocks.rack_no')->with('medicines');
             return DataTables::eloquent($stock_available)->addIndexColumn()
@@ -27,5 +28,18 @@ class AvailableStockController extends Controller
                 ->make(true);
         }
         return view('pharmacy.stockAvailable.index');
+    }
+
+    public function edit($id){
+        $stock_available = AvailableStock::find($id);
+        return view('pharmacy.stockAvailable.edit', compact('stock_available'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $stock_available = AvailableStock::find($id);
+        $stock_available->rack_no = $request->rack_no;
+        $stock_available->save();
+        return redirect()->route('stock_available.index')->with('custom_success', 'Stock Available has been Updated Successfully!');
     }
 }
