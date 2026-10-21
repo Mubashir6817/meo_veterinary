@@ -123,6 +123,21 @@
         <div class="dlabnav">
             <div class="dlabnav-scroll">
                 <ul class="metismenu" id="menu">
+                    <li><a href="{{ route('customers.index') }}" aria-expanded="false">
+                            <i class="fa fa-users"></i>
+                            <span class="nav-text">CUSTOMERS</span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="metismenu" id="menu">
+                    <li><a href="{{ route('sales.index') }}" aria-expanded="false">
+                            <i class="fa fa-cart-shopping"></i>
+                            <span class="nav-text">SALES</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="metismenu" id="menu">
                     <li><a href="{{ route('medicines.index') }}" aria-expanded="false">
                             <i class="fa fa-capsules"></i>
                             <span class="nav-text">MEDICINES</span>

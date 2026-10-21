@@ -68,4 +68,25 @@ Route::get('/stock_available/{id}/edit', [App\Http\Controllers\AvailableStockCon
 Route::post('/stock_available/{id}/update', [App\Http\Controllers\AvailableStockController::class, 'update'])->name('stock_available.update');
 Route::delete('/stock_available/{id}/destroy', [App\Http\Controllers\AvailableStockController::class, 'destroy'])->name('stock_available.destroy');
 
+
+
+//Customers
+Route::get('/customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.index');
+Route::get('/customers/create', [App\Http\Controllers\CustomerController::class, 'create'])->name('customers.create');
+Route::post('/customers/store', [App\Http\Controllers\CustomerController::class, 'store'])->name('customers.store');
+Route::get('/customers/{id}/view', [App\Http\Controllers\CustomerController::class, 'view'])->name('customers.view');
+Route::get('/customers/{id}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customers.edit');
+Route::post('/customers/{id}/update', [App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
+Route::delete('/customers/{id}/destroy', [App\Http\Controllers\CustomerController::class, 'destroy'])->name('customers.destroy');
+
+
+//Sales
+Route::get('/sales', [App\Http\Controllers\SaleController::class, 'index'])->name('sales.index');
+Route::get('/sales/create', [App\Http\Controllers\SaleController::class, 'create'])->name('sales.create');
+Route::post('/sales/store', [App\Http\Controllers\SaleController::class, 'store'])->name('sales.store');
+Route::get('/sales/medicine-info/{id}', [App\Http\Controllers\SaleController::class, 'getMedicineInfo'])->name('sales.medicineInfo');
+Route::get('/sales/{id}/view', [App\Http\Controllers\SaleController::class, 'view'])->name('sales.view');
+Route::delete('/sales/{id}/destroy', [App\Http\Controllers\SaleController::class, 'destroy'])->name('sales.destroy');
+
+
 });
